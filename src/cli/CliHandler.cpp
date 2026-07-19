@@ -5,14 +5,14 @@
 #include "logging/Logger.hpp"
 
 namespace mede::cli {
-    namepace {
+    namespace {
         constexpr std::string_view kProjectVersion = "0.1.0";
     }
 
     CliHandler::CliHandler() {
         app_.set_version_flag("--app-version", std::string(kProjectVersion));
         app_.require_subcommand(0, 1);
-        app_.add_option("--root", rootDirectory_, "Project root directory") -> default _val(".") -> option_text("PATH");
+        app_.add_option("--root", rootDirectory_, "Project root directory") -> default_val(".") -> option_text("PATH");
 
         registerInitCommand();
         registerPlaceholderCommand("import", "Import samples into the engine.");
@@ -20,7 +20,7 @@ namespace mede::cli {
         registerPlaceholderCommand("diff", "Difference between two sample versions.");
         registerPlaceholderCommand("timeline", "Show the evolution timeline for a sample family.");
         registerPlaceholderCommand("report", "Generate an analysis report.");
-        registerVersionComman();
+        registerVersionCommand();
     }
     void CliHandler::registerInitCommand() {
         auto* initCmd = app_.add_subcommand("init", "Initialize the project directory structure.");
@@ -34,13 +34,13 @@ namespace mede::cli {
 
     void CliHandler::registerVersionCommand() {
         auto* versionCmd = app_.add_subcommand("version", "Print the engine version.");
-        versionCmd -> callback([]() {std::cout << "Malware Evolution Diff Engine v" << kProjectVersion << std::endl;});
+        versionCmd -> callback([]() {std::cout << "MalDiff v" << kProjectVersion << std::endl;});
     }
 
     void CliHandler::handleInit() {
         try {
             core::Application app(rootDirectory_);
-            app.initializeProject();
+            app.intializeProject();
 
             std::cout << "Project initialized successfully at '" << app.root().string() << "." << std::endl;
             std::cout << " Configuration: " << app.configManager().path().string() << std::endl;

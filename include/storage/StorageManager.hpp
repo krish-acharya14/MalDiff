@@ -15,7 +15,7 @@ namespace mede::storage {
 
             [[nodiscard]] std::vector<std::filesystem::path> managedDirectories() const;
 
-            [[nodiscard]] std::filesystem::path& root() const {return rootDirectory_;}
+            [[nodiscard]] const std::filesystem::path& root() const {return rootDirectory_;}
 
         private:
             config::AppConfig config_;
