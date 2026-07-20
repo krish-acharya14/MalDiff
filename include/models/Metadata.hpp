@@ -27,7 +27,7 @@ namespace mede::models {
         };
     }
 
-    inline void from_json(const nlohmann::json& j, Metadat& m) {
+    inline void from_json(const nlohmann::json& j, Metadata& m) {
         m.id = j.value("id", common::EntityId{0});
         m.originalFileName = j.value("originalFileName", "");
         m.sourcePath = j.value("sourcePath", "");

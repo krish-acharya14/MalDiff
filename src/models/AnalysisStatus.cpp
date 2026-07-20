@@ -1,6 +1,6 @@
 #include "models/AnalysisStatus.hpp"
 
-namespace mede::model {
+namespace mede::models {
 
     AnalysisStatus analysisStatusFromString(std::string_view value) noexcept {
         if (value == "Imported") return AnalysisStatus::Imported;

@@ -3,7 +3,7 @@
 #include <string>
 #include <string_view>
 
-namespace mede::model {
+namespace mede::models {
     enum class AnalysisStatus {
         Unknown = 0,
         Imported,

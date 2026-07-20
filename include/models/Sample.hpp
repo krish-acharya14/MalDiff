@@ -22,13 +22,13 @@ namespace mede::models {
             {"storagePath", s.storagePath},
             {"hashes", s.hashes},
             {"metadata", s.metadata},
-            {"status", std::string(toString(s.status))},
+            {"status", std::string(mede::models::toString(s.status))},
         };
     }
 
     inline void from_json(const nlohmann::json& j, Sample& s) {
         s.id = j.value("id", common::EntityId{0});
-        s.storagePat = j.value("storagePath", "");
+        s.storagePath = j.value("storagePath", "");
         if (j.contains("hashes")) s.hashes = j.at("hashes").get<HashInfo>();
         if (j.contains("metadata")) s.metadata = j.at("metadata").get<Metadata>();
         s.status = analysisStatusFromString(j.value("status", std::string("Unknown")));

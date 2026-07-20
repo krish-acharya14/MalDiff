@@ -15,7 +15,7 @@ namespace mede::models {
         }
     };
 
-    inline voide to_json(nlohmann::json& j, const HashInfo& h) {
+    inline void to_json(nlohmann::json& j, const HashInfo& h) {
         j = nlohmann::json{
             {"md5", h.md5},
             {"sha1", h.sha1},

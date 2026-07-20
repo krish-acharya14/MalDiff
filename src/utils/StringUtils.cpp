@@ -1,4 +1,4 @@
-#include "utils/Stringutils.hpp"
+#include "utils/StringUtils.hpp"
 
 #include <algorithm>
 #include <cctype>
