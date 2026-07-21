@@ -13,12 +13,15 @@ namespace mede::cli {
             int run(int argc, char** argv);
         
         private:
-            CLI::App app_{"Malware Evolution Diff Engine"};
+            CLI::App app_{"MalDiff"};
             std::filesystem::path rootDirectory_{"."};
+            std::string importFilePat_;
 
             void registerInitCommand();
+            void registerImportCommand();
             void registerPlaceholderCommand(const std::string& name, const std::string& description);
             void registerVersionCommand();
             void handleInit();
+            void handleImport();
     };
 }
