@@ -15,7 +15,7 @@ namespace mede::cli {
         private:
             CLI::App app_{"MalDiff"};
             std::filesystem::path rootDirectory_{"."};
-            std::string importFilePat_;
+            std::string importFilePath_;
 
             void registerInitCommand();
             void registerImportCommand();
