@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 project(MalwareEvolutionDiffEngine
     VERSION 0.1.0
-    DESCRIPTION "Malware Evolution Diff Engine - Phase 1: Project Foundation & Architecture"
+    DESCRIPTION "MalDiff- Phase 1: Project Foundation & Architecture"
     LANGUAGES CXX
 )
 
