@@ -6,6 +6,12 @@ add_library(mede_core STATIC
     utils/FileUtils.cpp
     utils/StringUtils.cpp
     models/AnalysisStatus.cpp
+    pipeline/FileValidator.cpp
+    pipeline/BinaryLoader.cpp
+    pipeline/MagicDetector.cpp
+    pipeline/HashEngine.cpp
+    pipeline/MetadataExtractor.cpp
+    pipeline/SampleManager.cpp
 )
 
 target_include_directories(mede_core
@@ -18,6 +24,7 @@ target_link_libraries(mede_core
         mede_compiler_flags
         spdlog::spdlog
         nlohmann_json::nlohmann_json
+        OpenSSL::Crypto
 )
 
 add_executable(mede_cli

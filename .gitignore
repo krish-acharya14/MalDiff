@@ -93,3 +93,5 @@ coverage/
 vcpkg_installed/
 
 test-results/
+
+local.mk

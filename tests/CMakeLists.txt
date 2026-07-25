@@ -3,6 +3,7 @@ add_executable(mede_tests
     test_storage_manager.cpp
     test_sample.cpp
     test_string_utils.cpp
+    test_import_pipeline.cpp
 )
 
 target_link_libraries(mede_tests

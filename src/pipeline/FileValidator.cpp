@@ -35,6 +35,6 @@ namespace mede::pipeline {
         if (canonEc) 
             return common::Result<fs::path>::failure("Cannot resolve canonical path: " + path.string() + ": " + canonEc.message());
         
-        return common::Result<fs::path>::failure(std::move(canonical));
+        return common::Result<fs::path>::success(std::move(canonical));
     }
 }

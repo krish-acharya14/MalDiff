@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 project(MalwareEvolutionDiffEngine
     VERSION 0.1.0
-    DESCRIPTION "MalDiff- Phase 1: Project Foundation & Architecture"
+    DESCRIPTION "Malware Evolution Diff Engine - Phase 1: Binary Import Pipeline"
     LANGUAGES CXX
 )
 
@@ -56,6 +56,7 @@ target_compile_options(mede_compiler_flags INTERFACE
 find_package(CLI11 CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 add_subdirectory(src)
 
