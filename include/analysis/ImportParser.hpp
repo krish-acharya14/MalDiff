@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <span>
 #include <vector>
-#include "models/ImportedModule.hpp"
+#include "models/Import.hpp"
 #include "models/PEInfo.hpp"
 
 namespace mede::analysis {
@@ -11,6 +11,6 @@ namespace mede::analysis {
         public:
             ImportParser() = delete;
 
-            [[nodiscard]] static std::vector<models::ImportedModule> parse(std::span<const std::byte> data, const models::PEInfo& peInfo);
+            [[nodiscard]] static std::vector<models::Import> parse(std::span<const std::byte> data, const models::PEInfo& peInfo);
     };
 }

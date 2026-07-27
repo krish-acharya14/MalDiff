@@ -19,9 +19,11 @@ namespace mede::cli {
 
             void registerInitCommand();
             void registerImportCommand();
+            void registerAnalyzeCommand();
             void registerPlaceholderCommand(const std::string& name, const std::string& description);
             void registerVersionCommand();
             void handleInit();
             void handleImport();
+            void handleAnalyze();
     };
 }

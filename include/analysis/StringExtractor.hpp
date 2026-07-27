@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <span>
 #include <vector>
-#include "models/ExtractedString.hpp"
+#include "models/FeatureVector.hpp"
 
 namespace mede::analysis {
     class StringExtractor {

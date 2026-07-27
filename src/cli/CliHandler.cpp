@@ -3,10 +3,11 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 #include "config/ConfigManager.hpp"
-#include "models/BinaryType.hpp"
-#include "pipeline/SampleManager.hpp"
-#include "common/ErrorHandling.hpp"
-#include "logging/Logger.hpp"
+
+
+#include "utils/ErrorHandling.hpp"
+#include "utils/Logger.hpp"
+#include "analysis/AnalysisPipeline.hpp"
 
 namespace mede::cli {
     namespace {
@@ -20,7 +21,7 @@ namespace mede::cli {
 
         registerInitCommand();
         registerImportCommand();
-        registerPlaceholderCommand("analyze", "Analyze imported samples.");
+        registerAnalyzeCommand();
         registerPlaceholderCommand("diff", "Difference between two sample versions.");
         registerPlaceholderCommand("timeline", "Show the evolution timeline for a sample family.");
         registerPlaceholderCommand("report", "Generate an analysis report.");
@@ -35,6 +36,12 @@ namespace mede::cli {
         auto* importCmd = app_.add_subcommand("import", "Import a sample binary into the engine.");
         importCmd -> add_option("file", importFilePath_, "Path to the binary sample to import") -> required() -> option_text("FILE");
         importCmd -> callback([this]() { handleImport(); });
+    }
+
+    void CliHandler::registerAnalyzeCommand() {
+        auto* analyzeCmd = app_.add_subcommand("analyze", "Analyze a malware sample.");
+        analyzeCmd -> add_option("file", importFilePath_, "Path to the binary sample to analyze") -> required() -> option_text("FILE");
+        analyzeCmd -> callback([this]() { handleAnalyze(); });
     }
 
     void CliHandler::registerPlaceholderCommand(const std::string& name, const std::string& description) {
@@ -74,30 +81,37 @@ namespace mede::cli {
             logOpts.level = spdlog::level::from_str(cfg.logging.level);
             logging::Logger::init(logOpts, false);
 
-            pipeline::SampleManager manager(cfg, rootDirectory_);
-            const auto result = manager.importSample(std::filesystem::path{importFilePath_});
-
-            if (!result) {
-                std::cerr << "\n\u2718 Import failed: " << result.error << std::endl;
-                throw common::MedeException(result.error);
-            }
-
-            const auto& sample = result.value;
-            const auto& attrs = sample.metadata.attributes;
-
-            const std::string binaryTypeStr = attrs.count("binaryType") > 0 ? attrs.at("binaryType") : std::string(models::toString(models::BinaryType::Unknown));
-            const std::string sizeStr = attrs.count("fileSize") > 0 ? attrs.at("fileSize") : "?";
-
-            std::cout << "\n\u2714 Imported successfully\n"
-                  << "  Sample ID:   " << sample.id << "\n"
-                  << "  SHA256:      " << sample.hashes.sha256 << "\n"
-                  << "  Binary Type: " << binaryTypeStr << "\n"
-                  << "  Size:        " << sizeStr << " bytes\n"
-                  << std::endl;
-        } catch (const common::MedeException) {
+            std::cout << "\n\u2714 Import functionality merged with analyze in Phase 1.\n" << std::endl;
+        } catch (const common::MedeException&) {
             throw;
         } catch (const std::exception& ex) {
             std::cerr << "Unexpected error during import: " << ex.what() << std::endl;
+            throw common::MedeException(ex.what());
+        }
+    }
+
+    void CliHandler::handleAnalyze() {
+        try {
+            config::ConfigManager cfgMgr(rootDirectory_ / "configs" / "config.json");
+            const auto cfg = cfgMgr.load();
+
+            analysis::AnalysisPipeline pipeline(cfg, rootDirectory_);
+            const auto result = pipeline.analyze(std::filesystem::path{importFilePath_});
+
+            if (!result) {
+                std::cerr << "\n\u2718 Analysis failed: " << result.error << std::endl;
+                throw common::MedeException(result.error);
+            }
+
+            const auto& outcome = result.value;
+            std::cout << "\n\u2714 Analysis completed successfully\n"
+                      << "  Report saved to: " << outcome.reportPath.string() << "\n"
+                      << "  Binary Format:   " << outcome.features.binaryFormat << "\n"
+                      << "  Total Imports:   " << outcome.features.totalImportCount << "\n"
+                      << "  Overall Entropy: " << outcome.features.overallEntropy << "\n"
+                      << std::endl;
+        } catch (const std::exception& ex) {
+            std::cerr << "Unexpected error during analysis: " << ex.what() << std::endl;
             throw common::MedeException(ex.what());
         }
     }

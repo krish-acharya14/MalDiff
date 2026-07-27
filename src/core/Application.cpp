@@ -1,5 +1,5 @@
 #include "core/Application.hpp"
-#include "logging/Logger.hpp"
+#include "utils/Logger.hpp"
 
 namespace mede::core {
     namespace fs = std::filesystem;

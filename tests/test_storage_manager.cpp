@@ -2,7 +2,7 @@
 
 #include <filesystem>
 
-#include "common/ErrorHandling.hpp"
+#include "utils/ErrorHandling.hpp"
 #include "config/ConfigManager.hpp"
 #include "storage/StorageManager.hpp"
 

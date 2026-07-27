@@ -5,39 +5,9 @@
 #include <string>
 #include <vector>
 
+#include "models/Section.hpp"
+
 namespace mede::models {
-    struct PESection {
-        std::string name;
-        std::uint32_t virtualAddress{0};
-        std::uint32_t virtualSize{0};
-        std::uint32_t rawOffset{0};
-        std::uint32_t rawSize{0};
-        std::uint32_t characteristics{0};
-        double entropy{0.0};
-    };
-
-    inline void to_json(nlohmann::json& j, const PESection& s) {
-        j = nlohmann::json{
-            {"name", s.name},
-            {"virtualAddress", s.virtualAddress},
-            {"virtualSize", s.virtualSize},
-            {"rawOffset", s.rawOffset},
-            {"rawSize", s.rawSize},
-            {"characteristics", s.characteristics},
-            {"entropy", s.entropy},
-        };
-    }
-
-    inline void from_json(const nlohmann::json& j, PESection& s) {
-        s.name = j.value("name", "");
-        s.virtualAddress = j.value("virtualAddress", 0u);
-        s.virtualSize = j.value("virtualSize", 0u);
-        s.rawOffset = j.value("rawOffset", 0u);
-        s.rawSize = j.value("rawSize", 0u);
-        s.characteristics = j.value("characteristics", 0u);
-        s.entropy = j.value("entropy", 0.0);
-    }
-
     struct PEInfo {
         bool valid{false};
         std::string parseError;
@@ -69,7 +39,7 @@ namespace mede::models {
         };
         std::vector<DataDirectory> dataDirectories;
 
-        std::vector<PESection> sections;
+        std::vector<Section> sections;
     };
 
     inline void to_json(nlohmann::json& j, const PEInfo& p) {
@@ -134,7 +104,7 @@ namespace mede::models {
         }
 
         if (j.contains("sections")) {
-            p.sections = j.at("sections").get<std::vector<PESection>>();
+            p.sections = j.at("sections").get<std::vector<Section>>();
         }
 
         if (j.contains("dataDirectories")) {

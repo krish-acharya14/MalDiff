@@ -1,5 +1,5 @@
 #include "config/ConfigManager.hpp"
-#include "common/ErrorHandling.hpp"
+#include "utils/ErrorHandling.hpp"
 
 #include <fstream>
 #include <sstream>

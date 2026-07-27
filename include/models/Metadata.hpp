@@ -4,7 +4,7 @@
 #include <chrono>
 #include <string>
 #include <unordered_map>
-#include "common/Types.hpp"
+#include "utils/Types.hpp"
 
 namespace mede::models {
     struct Metadata {

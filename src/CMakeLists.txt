@@ -1,17 +1,17 @@
 add_library(mede_core STATIC
     core/Application.cpp
     config/ConfigManager.cpp
-    logging/Logger.cpp
     storage/StorageManager.cpp
     utils/FileUtils.cpp
     utils/StringUtils.cpp
-    models/AnalysisStatus.cpp
-    pipeline/FileValidator.cpp
-    pipeline/BinaryLoader.cpp
-    pipeline/MagicDetector.cpp
-    pipeline/HashEngine.cpp
-    pipeline/MetadataExtractor.cpp
-    pipeline/SampleManager.cpp
+    utils/Logger.cpp
+    analysis/ByteReader.cpp
+    analysis/EntropyEngine.cpp
+    analysis/ImportParser.cpp
+    analysis/PEParser.cpp
+    analysis/ReportGenerator.cpp
+    analysis/StringExtractor.cpp
+    analysis/AnalysisPipeline.cpp
 )
 
 target_include_directories(mede_core
@@ -38,4 +38,4 @@ target_link_libraries(mede_cli
         CLI11::CLI11
 )
 
-set_target_properties(mede_cli PROPERTIES OUTPUT_NAME "mede")
+set_target_properties(mede_cli PROPERTIES OUTPUT_NAME "maldiff")

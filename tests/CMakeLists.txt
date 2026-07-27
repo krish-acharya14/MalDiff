@@ -1,9 +1,13 @@
 add_executable(mede_tests
     test_config_manager.cpp
     test_storage_manager.cpp
-    test_sample.cpp
     test_string_utils.cpp
-    test_import_pipeline.cpp
+    analysis/test_entropy.cpp
+    analysis/test_string_extractor.cpp
+    analysis/test_pe_parser.cpp
+    analysis/test_import_parser.cpp
+    analysis/test_report.cpp
+    analysis/test_pipeline.cpp
 )
 
 target_link_libraries(mede_tests

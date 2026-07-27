@@ -1,7 +1,7 @@
 #pragma once 
 
 #include <filesystem>
-#include "common/ErrorHandling.hpp"
+#include "utils/ErrorHandling.hpp"
 #include "config/ConfigManager.hpp"
 #include "models/FeatureVector.hpp"
 

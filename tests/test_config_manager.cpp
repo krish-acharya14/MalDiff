@@ -3,7 +3,7 @@
 #include <filesystem>
 #include <fstream>
 
-#include "common/ErrorHandling.hpp"
+#include "utils/ErrorHandling.hpp"
 #include "config/ConfigManager.hpp"
 
 namespace fs = std::filesystem;

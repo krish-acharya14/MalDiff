@@ -4,7 +4,7 @@
 #include <string>
 
 namespace mede::models {
-    struct HashInfo {
+    struct Hashes {
         std::string md5;
         std::string sha1;
         std::string sha256;
@@ -15,7 +15,7 @@ namespace mede::models {
         }
     };
 
-    inline void to_json(nlohmann::json& j, const HashInfo& h) {
+    inline void to_json(nlohmann::json& j, const Hashes& h) {
         j = nlohmann::json{
             {"md5", h.md5},
             {"sha1", h.sha1},
@@ -24,7 +24,7 @@ namespace mede::models {
         };
     }
 
-    inline void from_json(const nlohmann::json& j, HashInfo& h) {
+    inline void from_json(const nlohmann::json& j, Hashes& h) {
         h.md5 = j.value("md5", "");
         h.sha1 = j.value("sha1", "");
         h.sha256 = j.value("sha256", "");
