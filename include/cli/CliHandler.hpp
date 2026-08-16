@@ -22,7 +22,7 @@ namespace mede::cli {
             void registerInitCommand();
             void registerImportCommand();
             void registerAnalyzeCommand();
-            void compareCommand();
+            void registerCompareCommand();
             void registerPlaceholderCommand(const std::string& name, const std::string& description);
             void registerVersionCommand();
             void handleInit();

@@ -12,6 +12,13 @@ add_library(mede_core STATIC
     analysis/ReportGenerator.cpp
     analysis/StringExtractor.cpp
     analysis/AnalysisPipeline.cpp
+    diff/SectionComparator.cpp
+    diff/ImportComparator.cpp
+    diff/StringComparator.cpp
+    diff/MetadataComparator.cpp
+    diff/HashComparator.cpp
+    diff/EntropyComparator.cpp
+    diff/DiffEngine.cpp
 )
 
 target_include_directories(mede_core
